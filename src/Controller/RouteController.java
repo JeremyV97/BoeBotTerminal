@@ -12,6 +12,7 @@ public class RouteController {
 
     private Route route;
     private List<Obstacle> obstacles;
+    private String databaseIP;
 
     public RouteController(){
         obstacles = new ArrayList<Obstacle>();
@@ -19,6 +20,7 @@ public class RouteController {
 
         route.btnDrive.setOnAction(event -> {
             getCoordinates();
+            getDatabaseIP();
         });
 
         route.btnAddObstacle.setOnAction(event -> {
@@ -29,12 +31,16 @@ public class RouteController {
     private void getCoordinates(){
         int x = route.getX();
         int y = route.getY();
-        if((x == -1) || (y == -1)){
+        if((x < 0) || (y < 0)){
             //Invalid coordinates
-            System.out.println("Invalid coordinates");
+            System.out.println("Invalid, coordinates can't be lower than 0");
             return;
         }
         System.out.println(x + " " + y);
+    }
+
+    private void getDatabaseIP(){
+        this.databaseIP = route.txtDatabaseIP.getText();
     }
 
     private void saveObsticle(){
