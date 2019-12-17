@@ -60,7 +60,7 @@ public class Route {
 
         btnDrive.relocate(80, 380);
 
-        txtDatabaseIP = new TextField();
+        txtDatabaseIP = new TextField("145.48.");
         txtDatabaseIP.relocate(80, 500);
         lblDatabaseIP = new Label("Database IP: ");
         lblDatabaseIP.relocate(0, 500);
