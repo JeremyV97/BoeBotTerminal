@@ -6,13 +6,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import Controller.Gui;
 
-import java.util.IllegalFormatConversionException;
-
 public class Route {
 
     public final Pane root;
-    public Label lblX, lblY, lblFirstCoordinates, lblObstakels, lblObBeg, lblObEnd, lblX2, lblX3, lblY2, lblY3;
-    public TextField txtX, txtY, txtObX1, txtObX2, txtObY1, txtObY2;
+    public Label lblX, lblY, lblFirstCoordinates, lblObstakels, lblObBeg, lblObEnd, lblX2, lblX3, lblY2, lblY3, lblDatabaseIP;
+    public TextField txtX, txtY, txtObX1, txtObX2, txtObY1, txtObY2, txtDatabaseIP;
     public Button btnDrive, btnAddObstacle;
 
     public Route(){
@@ -62,8 +60,14 @@ public class Route {
 
         btnDrive.relocate(80, 380);
 
+        txtDatabaseIP = new TextField();
+        txtDatabaseIP.relocate(80, 500);
+        lblDatabaseIP = new Label("Database IP: ");
+        lblDatabaseIP.relocate(0, 500);
+
         root.getChildren().addAll(lblFirstCoordinates, lblX, lblY, txtX, txtY);
         root.getChildren().addAll(lblObstakels, lblObBeg, txtObX1, txtObY1, lblObEnd, txtObX2, txtObY2, btnAddObstacle, lblX2, lblY2, lblX3, lblY3, btnDrive);
+        root.getChildren().addAll(lblDatabaseIP, txtDatabaseIP);
     }
 
     public int getX(){
