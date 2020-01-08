@@ -9,9 +9,9 @@ import Controller.Gui;
 public class Route {
 
     public final Pane root;
-    public Label lblX, lblY, lblFirstCoordinates, lblObstakels, lblObBeg, lblObEnd, lblX2, lblX3, lblY2, lblY3, lblDatabaseIP;
-    public TextField txtX, txtY, txtObX1, txtObX2, txtObY1, txtObY2, txtDatabaseIP;
-    public Button btnDrive, btnAddObstacle;
+    public Label lblX, lblY, lblFirstCoordinates, lblObstakels, lblObBeg, lblObEnd, lblX2, lblX3, lblY2, lblY3, lblDatabaseIP, lblGridSize;
+    public TextField txtX, txtY, txtObX1, txtObX2, txtObY1, txtObY2, txtDatabaseIP, txtGridSizeX, txtGridSizeY;
+    public Button btnDrive, btnAddObstacle, btnGridUpdate, btnClearDatabase;
 
     public Route(){
         root = new Pane();
@@ -19,10 +19,10 @@ public class Route {
 
         lblX = new Label("X Coordinate: ");
         lblY = new Label("Y Coordinate: ");
-        lblFirstCoordinates = new Label("Fill in the set of coordinates. X between 0 and 4, Y between 0 and 6");
+        lblFirstCoordinates = new Label("Fill in the coordinates where you want to go to.");
         txtX = new TextField();
         txtY = new TextField();
-        btnDrive = new Button("Drive to coordinates");
+        btnDrive = new Button("Upload all coordinates");
 
         lblFirstCoordinates.relocate(80, 0);
         lblX.relocate(0, 20);
@@ -60,14 +60,28 @@ public class Route {
 
         btnDrive.relocate(80, 380);
 
-        txtDatabaseIP = new TextField("145.48.");
+        txtDatabaseIP = new TextField("localhost");
         txtDatabaseIP.relocate(80, 500);
         lblDatabaseIP = new Label("Database IP: ");
         lblDatabaseIP.relocate(0, 500);
 
+        lblGridSize = new Label("Fill in the grid size here");
+        txtGridSizeX = new TextField("8");
+        txtGridSizeY = new TextField("5");
+        txtGridSizeX.setPromptText("X");
+        txtGridSizeY.setPromptText("Y");
+        btnGridUpdate = new Button("Update Grid Size");
+        btnClearDatabase = new Button("Clear last cycle");
+
+        lblGridSize.relocate(0, 530);
+        txtGridSizeX.relocate(0, 560);
+        txtGridSizeY.relocate(0, 590);
+        btnGridUpdate.relocate(0, 620);
+        btnClearDatabase.relocate(110, 620);
+
         root.getChildren().addAll(lblFirstCoordinates, lblX, lblY, txtX, txtY);
         root.getChildren().addAll(lblObstakels, lblObBeg, txtObX1, txtObY1, lblObEnd, txtObX2, txtObY2, btnAddObstacle, lblX2, lblY2, lblX3, lblY3, btnDrive);
-        root.getChildren().addAll(lblDatabaseIP, txtDatabaseIP);
+        root.getChildren().addAll(lblDatabaseIP, txtDatabaseIP, lblGridSize, txtGridSizeX, txtGridSizeY, btnGridUpdate, btnClearDatabase);
     }
 
     public int getX(){
