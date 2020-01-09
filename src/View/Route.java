@@ -68,7 +68,7 @@ public class Route {
         lblDatabaseIP.relocate(0, 500);
 
         lblGridSize = new Label("Fill in the grid size here");
-        txtGridSizeX = new TextField("8");
+        txtGridSizeX = new TextField("7");
         txtGridSizeY = new TextField("5");
         txtGridSizeX.setPromptText("X");
         txtGridSizeY.setPromptText("Y");

@@ -18,7 +18,7 @@ public class RouteController {
     private String port;
     int endCoordinateX = 0;
     int endCoordinateY = 0;
-    int gridSizeX = 8;
+    int gridSizeX = 7;
     int gridSizeY = 5;
 
     public RouteController(){
@@ -61,16 +61,17 @@ public class RouteController {
         });
 
         route.btnClearDatabase.setOnAction(event->{
-            obstacles.clear();
-            clearDatabase();
-            route.btnDrive.setDisable(false);
-            route.btnClearDatabase.setDisable(true);
-            route.txtX.clear();
-            route.txtY.clear();
-            route.txtObY2.clear();
-            route.txtObY1.clear();
-            route.txtObX2.clear();
-            route.txtObX1.clear();
+            if(clearDatabase()) {
+                obstacles.clear();
+                route.btnDrive.setDisable(false);
+                route.btnClearDatabase.setDisable(true);
+                route.txtX.clear();
+                route.txtY.clear();
+                route.txtObY2.clear();
+                route.txtObY1.clear();
+                route.txtObX2.clear();
+                route.txtObX1.clear();
+            }
         });
     }
 
@@ -170,17 +171,20 @@ public class RouteController {
         }
     }
 
-    public void clearDatabase(){
+    public boolean clearDatabase(){
         DatabaseController con = new DatabaseController(getDatabaseIP(),"3306",  "boebot", "root", "");
         try {
             con.preparedStatement("DELETE FROM path", new ArrayList());
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
         try {
             con.preparedStatement("DELETE FROM obstakel", new ArrayList());
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 }
