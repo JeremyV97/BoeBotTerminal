@@ -10,7 +10,7 @@ public class Route {
 
     public final Pane root;
     public Label lblX, lblY, lblFirstCoordinates, lblObstakels, lblObBeg, lblObEnd, lblX2, lblX3, lblY2, lblY3, lblDatabaseIP, lblGridSize;
-    public TextField txtX, txtY, txtObX1, txtObX2, txtObY1, txtObY2, txtDatabaseIP, txtGridSizeX, txtGridSizeY;
+    public TextField txtX, txtY, txtObX1, txtObX2, txtObY1, txtObY2, txtDatabaseIP, txtGridSizeX, txtGridSizeY, txtPort;
     public Button btnDrive, btnAddObstacle, btnGridUpdate, btnClearDatabase, btnAdvanced;
 
     public Route(){
@@ -61,8 +61,10 @@ public class Route {
         lblY3.relocate(0, 320);
 
         txtDatabaseIP = new TextField("localhost");
-        txtDatabaseIP.relocate(80, 500);
-        lblDatabaseIP = new Label("Database IP: ");
+        txtDatabaseIP.relocate(120, 500);
+        txtPort = new TextField("3306");
+        txtPort.relocate(270, 500);
+        lblDatabaseIP = new Label("Database IP and port: ");
         lblDatabaseIP.relocate(0, 500);
 
         lblGridSize = new Label("Fill in the grid size here");
@@ -83,7 +85,7 @@ public class Route {
 
         root.getChildren().addAll(lblFirstCoordinates, lblX, lblY, txtX, txtY);
         root.getChildren().addAll(lblObstakels, lblObBeg, txtObX1, txtObY1, lblObEnd, txtObX2, txtObY2, btnAddObstacle, lblX2, lblY2, lblX3, lblY3, btnDrive);
-        root.getChildren().addAll(lblDatabaseIP, txtDatabaseIP, lblGridSize, txtGridSizeX, txtGridSizeY, btnGridUpdate, btnClearDatabase);
+        root.getChildren().addAll(lblDatabaseIP, txtDatabaseIP, lblGridSize, txtGridSizeX, txtGridSizeY, btnGridUpdate, btnClearDatabase, txtPort);
     }
 
     public int getX(){

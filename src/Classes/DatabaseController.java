@@ -29,14 +29,6 @@ public class DatabaseController {
         this.password = password;
     }
 
-    public DatabaseController(String hostname, String database, String username, String password){
-        this.hostname = hostname;
-        this.port = "3306";
-        this.database = database;
-        this.username = username;
-        this.password = password;
-    }
-
     public DatabaseController(String hostname, String port, String database, String username, String password){
         this.hostname = hostname;
         this.port = port;

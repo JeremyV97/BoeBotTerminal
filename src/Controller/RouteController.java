@@ -15,6 +15,7 @@ public class RouteController {
     private Route route;
     private List<Obstacle> obstacles;
     private String databaseIP;
+    private String port;
     int endCoordinateX = 0;
     int endCoordinateY = 0;
     int gridSizeX = 8;
@@ -83,8 +84,8 @@ public class RouteController {
             return false;
         }
         if (x > gridSizeX || y > gridSizeY){
-            System.out.println("Invalid, coordinates have to be a number and can't be lower than 0");
-            new Alert(Alert.AlertType.ERROR, "Invalid, coordinates have to be a number and can't be lower than 0").showAndWait();
+            System.out.println("Invalid, coordinates have to be a number and can't be higher than the given grid size");
+            new Alert(Alert.AlertType.ERROR, "Invalid, coordinates have to be a number and can't be higher than the given grid size").showAndWait();
             return false;
         }
         System.out.println("Uploading coordinates X: " + x + ", Y: " + y);
@@ -96,6 +97,11 @@ public class RouteController {
     private String getDatabaseIP(){
         this.databaseIP = route.txtDatabaseIP.getText();
         return this.databaseIP;
+    }
+
+    private String getPort(){
+        this.port = route.txtPort.getText();
+        return this.port;
     }
 
     private void saveObstacle(){
@@ -137,7 +143,7 @@ public class RouteController {
     private void syncAllCoordinates(){
         //Now we upload all the coordinates to the database so the boebot can download them
         String sqlPath = "INSERT INTO path VALUES (?, ?);";
-        DatabaseController con = new DatabaseController(getDatabaseIP(),"3306",  "boebot", "root", "");
+        DatabaseController con = new DatabaseController(getDatabaseIP(), getPort(),  "boebot", "root", "");
 
         try {
             ArrayList endCoordinates = new ArrayList<>();
