@@ -11,7 +11,7 @@ public class Route {
     public final Pane root;
     public Label lblX, lblY, lblFirstCoordinates, lblObstakels, lblObBeg, lblObEnd, lblX2, lblX3, lblY2, lblY3, lblDatabaseIP, lblGridSize;
     public TextField txtX, txtY, txtObX1, txtObX2, txtObY1, txtObY2, txtDatabaseIP, txtGridSizeX, txtGridSizeY;
-    public Button btnDrive, btnAddObstacle, btnGridUpdate, btnClearDatabase;
+    public Button btnDrive, btnAddObstacle, btnGridUpdate, btnClearDatabase, btnAdvanced;
 
     public Route(){
         root = new Pane();
@@ -23,6 +23,7 @@ public class Route {
         txtX = new TextField();
         txtY = new TextField();
         btnDrive = new Button("Upload all coordinates");
+        btnAdvanced = new Button("Manual Obstacles");
 
         lblFirstCoordinates.relocate(80, 0);
         lblX.relocate(0, 20);
@@ -30,7 +31,7 @@ public class Route {
         txtX.relocate(80, 20);
         txtY.relocate(80, 50);
 
-        lblObstakels = new Label("Fill in the list of obstacles on the grid");
+        lblObstakels = new Label("Fill in the list of obstacles on the grid (Optional)");
         txtObX1 = new TextField();
         txtObY1 = new TextField();
         txtObX2 = new TextField();
@@ -47,6 +48,7 @@ public class Route {
         txtObX2.relocate(80, 290);
         txtObY2.relocate(80, 320);
         btnAddObstacle.relocate(80, 350);
+        btnAdvanced.relocate(150, 350);
 
         lblX2 = new Label("X Coordinate: ");
         lblX3 = new Label("X Coordinate: ");
@@ -57,8 +59,6 @@ public class Route {
         lblY2.relocate(0, 230);
         lblX3.relocate(0, 290);
         lblY3.relocate(0, 320);
-
-        btnDrive.relocate(80, 380);
 
         txtDatabaseIP = new TextField("localhost");
         txtDatabaseIP.relocate(80, 500);
@@ -77,7 +77,9 @@ public class Route {
         txtGridSizeX.relocate(0, 560);
         txtGridSizeY.relocate(0, 590);
         btnGridUpdate.relocate(0, 620);
-        btnClearDatabase.relocate(110, 620);
+
+        btnDrive.relocate(100, 680);
+        btnClearDatabase.relocate(0, 680);
 
         root.getChildren().addAll(lblFirstCoordinates, lblX, lblY, txtX, txtY);
         root.getChildren().addAll(lblObstakels, lblObBeg, txtObX1, txtObY1, lblObEnd, txtObX2, txtObY2, btnAddObstacle, lblX2, lblY2, lblX3, lblY3, btnDrive);

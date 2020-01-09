@@ -24,14 +24,24 @@ public class RouteController {
         obstacles = new ArrayList<Obstacle>();
         route = new Route();
         clearDatabase();
+        route.btnClearDatabase.setDisable(true);
         route.btnDrive.setOnAction(event -> {
-            getCoordinates();
-            getDatabaseIP();
-            syncAllCoordinates();
+            boolean shouldEnableButtons = false;
+            if(!route.txtX.getText().isEmpty() && !route.txtY.getText().isEmpty()) {
+                shouldEnableButtons = getCoordinates();
+                getDatabaseIP();
+                syncAllCoordinates();
+                if(shouldEnableButtons) {
+                    route.btnDrive.setDisable(true);
+                    route.btnClearDatabase.setDisable(false);
+                }
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Don't forget to set the destination coordinates").showAndWait();
+            }
         });
 
         route.btnAddObstacle.setOnAction(event -> {
-            saveObsticle();
+            saveObstacle();
         });
 
         route.btnGridUpdate.setOnAction(event ->{
@@ -50,25 +60,37 @@ public class RouteController {
         });
 
         route.btnClearDatabase.setOnAction(event->{
+            obstacles.clear();
             clearDatabase();
+            route.btnDrive.setDisable(false);
+            route.btnClearDatabase.setDisable(true);
+            route.txtX.clear();
+            route.txtY.clear();
+            route.txtObY2.clear();
+            route.txtObY1.clear();
+            route.txtObX2.clear();
+            route.txtObX1.clear();
         });
     }
 
-    private void getCoordinates(){
+    private boolean getCoordinates(){
         int x = route.getX();
         int y = route.getY();
         if((x < 0) || (y < 0)){
             //Invalid coordinates
-            System.out.println("Invalid, coordinates can't be lower than 0");
-            return;
+            System.out.println("Invalid, coordinates have to be a number and can't be lower than 0");
+            new Alert(Alert.AlertType.ERROR, "Invalid, coordinates have to be a number and can't be lower than 0").showAndWait();
+            return false;
         }
         if (x > gridSizeX || y > gridSizeY){
-            System.out.println("Invalid, coordinates can't be higher than the given gridsize");
-            return;
+            System.out.println("Invalid, coordinates have to be a number and can't be lower than 0");
+            new Alert(Alert.AlertType.ERROR, "Invalid, coordinates have to be a number and can't be lower than 0").showAndWait();
+            return false;
         }
         System.out.println("Uploading coordinates X: " + x + ", Y: " + y);
         endCoordinateX = x;
         endCoordinateY = y;
+        return true;
     }
 
     private String getDatabaseIP(){
@@ -76,7 +98,7 @@ public class RouteController {
         return this.databaseIP;
     }
 
-    private void saveObsticle(){
+    private void saveObstacle(){
         int x1 = 0;
         int x2 = 0;
         int y1 = 0;
